@@ -2,20 +2,24 @@ class Solution {
  public:
     int getMinDiff(int arr[], int n, int k) {
        // code here
+     
+       int mini=0,maxi=0,r=0;
        sort(arr,arr+n);
-       
-       int ans=arr[n-1]-arr[0];
-       int smallest=arr[0]+k;
-       int largest=arr[n-1]-k;
-       int mi, ma;
-       for(int i=0;i<n-1;i++)
+       r=arr[n-1]-arr[0];
+    
+       for(int i=1;i<n;i++)
        {
-            mi=min(smallest,arr[i+1]-k);
-            ma=max(largest,arr[i]+k);
-            if(mi<0) continue;
-            ans=min(ans, ma-mi);
+           if(arr[i]>=k)
+           {
+               maxi=max(arr[i-1]+k,arr[n-1]-k);
+               mini=min(arr[i]-k,arr[0]+k);
+               r=min(r,maxi-mini);
+           }
+           else
+           {
+               continue;
+           }
        }
-       
-       return ans;
-   }
+       return r;
+    }
 };
